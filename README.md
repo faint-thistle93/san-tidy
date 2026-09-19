@@ -67,6 +67,16 @@ number, or a game result are passed through unchanged. Pass
 `{ strict: true }` to throw a `NotationError` on the first
 unrecognized token instead.
 
+## Tests
+
+```
+npm test
+```
+
+This compiles the project and runs `dist/format.test.js`. There's no
+test framework involved - just a small hand-rolled runner in
+`src/format.test.ts`, in keeping with the zero-dependency goal.
+
 ## License
 
 MIT, see [LICENSE](LICENSE).

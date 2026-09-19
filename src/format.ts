@@ -28,12 +28,13 @@ const PIECE_LETTERS = 'KQRBN';
 
 // A non-castling SAN move: optional piece letter, optional
 // disambiguating file and/or rank, optional capture mark, the
-// destination square, and an optional promotion. Suffixes (+, #) are
-// stripped and handled separately before this is applied. Matching is
-// case-insensitive so "nf3" and "NF3" both parse; casing is fixed up
-// by the caller.
+// destination square, and an optional promotion. Promotions show up
+// separated by "=" or "/" ("e8=Q", "e8/Q") or not separated at all
+// ("e8Q"). Suffixes (+, #) are stripped and handled separately before
+// this is applied. Matching is case-insensitive so "nf3" and "NF3"
+// both parse; casing is fixed up by the caller.
 const MOVE_RE = new RegExp(
-  `^([${PIECE_LETTERS}])?([a-h])?([1-8])?(x)?([a-h][1-8])(=?([${PIECE_LETTERS}]))?$`,
+  `^([${PIECE_LETTERS}])?([a-h])?([1-8])?(x)?([a-h][1-8])([=/]?([${PIECE_LETTERS}]))?$`,
   'i',
 );
 

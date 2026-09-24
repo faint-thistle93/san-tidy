@@ -67,6 +67,20 @@ number, or a game result are passed through unchanged. Pass
 `{ strict: true }` to throw a `NotationError` on the first
 unrecognized token instead.
 
+## CLI
+
+After building, `dist/cli.js` normalizes movetext from a file or
+stdin:
+
+```
+node dist/cli.js game.txt
+cat game.txt | node dist/cli.js
+node dist/cli.js --strict game.txt
+```
+
+Once the package is installed as a dependency, the same thing is
+available as `san-tidy` via the `bin` entry in package.json.
+
 ## Tests
 
 ```

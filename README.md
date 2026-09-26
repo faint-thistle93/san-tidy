@@ -51,6 +51,17 @@ It does not validate that a move is legal, or even that the piece
 named can reach the destination square - that requires a board model,
 which is out of scope here.
 
+Leading PGN tag pairs and `{...}`/`;` comments are recognized and
+passed through as-is:
+
+```ts
+normalizeMovetext(
+  '[Event "Casual Game"]\n[Site "Internet"]\n\n' +
+    '1.e4 e5 2.nf3 {developing} nc6',
+);
+// '[Event "Casual Game"]\n[Site "Internet"]\n\n1. e4 e5 2. Nf3 {developing} Nc6'
+```
+
 ## Usage
 
 There's no published package yet; clone the repo and build it with

@@ -97,6 +97,34 @@ check('strict mode throws NotationError on the first unrecognized token', () => 
   }
 });
 
+check('leading PGN tag pairs pass through above the normalized movetext', () => {
+  assertEqual(
+    normalizeMovetext('[Event "Casual Game"]\n[Site "Internet"]\n\n1.e4 e5 2.nf3'),
+    '[Event "Casual Game"]\n[Site "Internet"]\n\n1. e4 e5 2. Nf3',
+  );
+});
+
+check('brace comments are carried through untokenized', () => {
+  assertEqual(
+    normalizeMovetext('1. e4 {a strong opening} e5 2. nf3 {develops} nc6'),
+    '1. e4 {a strong opening} e5 2. Nf3 {develops} Nc6',
+  );
+});
+
+check('semicolon comments run to end of line', () => {
+  assertEqual(
+    normalizeMovetext('1. e4 e5 ; a symmetric reply\n2. nf3 nc6'),
+    '1. e4 e5 ; a symmetric reply 2. Nf3 Nc6',
+  );
+});
+
+check('a multi-line brace comment is kept intact', () => {
+  assertEqual(
+    normalizeMovetext('1. e4 {this comment\nspans two lines} e5'),
+    '1. e4 {this comment\nspans two lines} e5',
+  );
+});
+
 check('empty input normalizes to an empty string', () => {
   assertEqual(normalizeMovetext(''), '');
   assertEqual(normalizeMovetext('   '), '');
